@@ -111,6 +111,3 @@ Your Name - [@jayddeeppp](https://twitter.com/jayddeeppp)
 
 Project Link: [https://github.com/jaydxxp/travelio](https://github.com/jaydxxp/travelio)
 
----
-
-Made with ❤️ by [Your Name]
