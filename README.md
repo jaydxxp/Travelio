@@ -53,6 +53,7 @@ GEMINI_API_KEY=your_gemini_api_key
 WEATHERBIT_API_KEY=your_weatherbit_api_key
 UNSPLASH_API_KEY=your_unsplash_api_key
 MAPBOX_API_KEY=your_mapbox_api_key
+Mongoose="connection_string"
 ```
 
 4. Start the application
@@ -106,9 +107,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - your.email@example.com
+Your Name - [@jayddeeppp](https://twitter.com/jayddeeppp) 
 
-Project Link: [https://github.com/yourusername/travelio](https://github.com/yourusername/travelio)
+Project Link: [https://github.com/jaydxxp/travelio](https://github.com/jaydxxp/travelio)
 
 ---
 
