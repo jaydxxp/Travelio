@@ -20,6 +20,8 @@ export default function TravelSearchForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [dateError, setDateError] = useState<string | null>(null);
+
   const interestOptions = [
     "Adventure",
     "Beach",
@@ -31,7 +33,63 @@ export default function TravelSearchForm() {
     "Other",
   ];
 
+
+  const daysBetweenInclusive = (start: string, end: string) => {
+    const s = new Date(start);
+    const e = new Date(end);
+    if (isNaN(s.getTime()) || isNaN(e.getTime())) return NaN;
+    const diff = Math.round((e.getTime() - s.getTime()) / 86400000);
+    return diff + 1; 
+  };
+
   
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayStr = today.toISOString().slice(0, 10);
+
+  useEffect(() => {
+    setDateError(null);
+    if (!startDate && !endDate) return;
+
+    if (startDate) {
+      const s = new Date(startDate);
+      if (isNaN(s.getTime())) {
+        setDateError("Invalid start date.");
+        return;
+      }
+      if (s.getTime() < today.getTime()) {
+        setDateError("Start date cannot be in the past.");
+        return;
+      }
+    }
+
+    if (endDate) {
+      const e = new Date(endDate);
+      if (isNaN(e.getTime())) {
+        setDateError("Invalid end date.");
+        return;
+      }
+      if (e.getTime() < today.getTime()) {
+        setDateError("End date cannot be in the past.");
+        return;
+      }
+    }
+
+    if (startDate && endDate) {
+      const s = new Date(startDate);
+      const e = new Date(endDate);
+      if (s.getTime() > e.getTime()) {
+        setDateError("Start date must be before or equal to end date.");
+        return;
+      }
+      const days = daysBetweenInclusive(startDate, endDate);
+      if (days > 12) {
+        setDateError("Trip duration cannot exceed 12 days.");
+        return;
+      }
+    }
+  }, [startDate, endDate]);
+
   useEffect(() => {
     Papa.parse("/world-cities.csv", {
       download: true,
@@ -70,6 +128,52 @@ export default function TravelSearchForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+
+    if (dateError) {
+      setError(dateError);
+      return;
+    }
+
+
+    if (startDate) {
+      const s = new Date(startDate);
+      if (isNaN(s.getTime())) {
+        setError("Please provide a valid start date.");
+        return;
+      }
+      if (s.getTime() < today.getTime()) {
+        setError("Start date cannot be in the past.");
+        return;
+      }
+    }
+
+    if (endDate) {
+      const e = new Date(endDate);
+      if (isNaN(e.getTime())) {
+        setError("Please provide a valid end date.");
+        return;
+      }
+      if (e.getTime() < today.getTime()) {
+        setError("End date cannot be in the past.");
+        return;
+      }
+    }
+
+    if (startDate && endDate) {
+      const days = daysBetweenInclusive(startDate, endDate);
+      if (days > 12) {
+        setError("Trip duration cannot exceed 12 days.");
+        return;
+      }
+      const s = new Date(startDate);
+      const e = new Date(endDate);
+      if (s.getTime() > e.getTime()) {
+        setError("Start date must be before or equal to end date.");
+        return;
+      }
+    }
+
     const finalInterest = interest === "Other" ? customInterest : interest;
 
     const payload = {
@@ -164,6 +268,8 @@ export default function TravelSearchForm() {
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-colors bg-gray-50 text-gray-900"
+              aria-invalid={!!dateError}
+              min={todayStr}
             />
           </div>
 
@@ -181,7 +287,14 @@ export default function TravelSearchForm() {
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-colors bg-gray-50 text-gray-900"
+              aria-invalid={!!dateError}
+              min={todayStr}
             />
+            {dateError && (
+              <p className="mt-2 text-sm text-red-600" role="alert">
+                {dateError}
+              </p>
+            )}
           </div>
 
      

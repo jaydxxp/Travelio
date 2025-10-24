@@ -38,7 +38,7 @@ if (targetDateNum < firstDate || targetDateNum > lastDate) {
   return {
     date,
     temp: 25,
-    description: 'Forecast not available (date outside free-tier limit)',
+    description: 'Forecast not available',
     icon: '',
   };
 }
