@@ -27,20 +27,36 @@ router.get('/itinerary/:shareableId', async (req, res) => {
   res.json(itinerary);
 });
 
-router.post('/suggested-trips', async (req: Request, res: Response) => {
+
+router.get('/suggested-trips/:id', async (req: Request, res: Response) => {
   try {
-    const data: Partial<ISuggestedTrip> = req.body;
-    const trip = new SuggestedTrip(data);
-    await trip.save();
-    res.status(201).json(trip);
+    const { id } = req.params;
+    const trip = await SuggestedTrip.findById(id);
+    if (!trip) return res.status(404).json({ message: 'Suggested trip not found' });
+    return res.status(200).json(trip);
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
+    console.error('Error fetching suggested trip:', error);
+    return res.status(500).json({ message: 'Server error', error });
   }
 });
-router.get('/suggested-trips', async (_req: Request, res: Response) => {
+
+
+router.get('/suggested-trips', async (req: Request, res: Response) => {
   try {
-    const trips = await SuggestedTrip.find();
-    res.json(trips);
+    const { country, destination } = req.query;
+
+ 
+    const filter: any = {};
+    if (country) filter.country = { $regex: new RegExp(country as string, 'i') };
+    if (destination) filter.destination = { $regex: new RegExp(destination as string, 'i') };
+
+    const trips = await SuggestedTrip.find(filter).sort({ createdAt: -1 });
+
+    if (!trips.length) {
+      return res.status(404).json({ message: 'No suggested trips found' });
+    }
+
+    res.status(200).json(trips);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }

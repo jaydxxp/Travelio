@@ -113,7 +113,7 @@ export default function TravelSearchForm() {
   return (
     <div className="w-full pt-16 max-w-sm">
       <div className="font-bold text-4xl text-center mb-5">Plan Your Trip</div>
-      <div className="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 rounded-3xl shadow-2xl p-6">
+      <div className="bg-linear-to-br from-blue-50 via-cyan-50 to-blue-100 rounded-3xl shadow-2xl p-6">
         <form className="space-y-4" onSubmit={handleSubmit}>
          
           <div className="relative">

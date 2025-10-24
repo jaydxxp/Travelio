@@ -1,9 +1,9 @@
 import SuggestedTrips from "@/components/SuggestedTrips";
-import TripItinerary from "@/components/trip";
 
-export default function Suggested()
-{
-    return <div>
-        <SuggestedTrips/>
+export default function Suggested() {
+  return (
+    <div className="min-h-screen">
+      <SuggestedTrips />
     </div>
+  );
 }

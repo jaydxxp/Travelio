@@ -110,7 +110,7 @@ export default function RecentTrips() {
           <div className="text-4xl md:text-4xl font-bold text-center text-slate-900 mb-2">Recently Created Trips</div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 rounded-2xl p-6 md:p-8">
+        <div className="bg-linear-to-br from-blue-50 via-cyan-50 to-blue-100 rounded-2xl p-6 md:p-8">
           {loading && <div className="text-center py-6 text-sm text-slate-600">Loading recent trips...</div>}
           {error && <div className="text-center py-6 text-sm text-red-600">{error}</div>}
 
@@ -122,7 +122,7 @@ export default function RecentTrips() {
                 onClick={() => router.push(`/trip/${trip.id}`)}
                 className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
               >
-                <div className="relative h-24 overflow-hidden bg-gradient-to-br from-blue-200 to-cyan-200">
+                <div className="relative h-24 overflow-hidden bg-linear-to-br from-blue-200 to-cyan-200">
                   <img
                     src={trip.image || placeholder}
                     alt={trip.destination}

@@ -221,7 +221,7 @@ export default function TripItinerary() {
       
                 <div className="md:col-span-3 p-6">
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       <div className="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center">
                         <Clock className="w-6 h-6 text-blue-600" />
                       </div>
@@ -232,7 +232,7 @@ export default function TripItinerary() {
                       <h3 className="text-xl font-semibold text-slate-900 mb-3">{plan.activity}</h3>
                       
                       <div className="flex items-start gap-2 text-slate-600 mb-4">
-                        <MapPin className="w-4 h-4 mt-1 flex-shrink-0 text-blue-500" />
+                        <MapPin className="w-4 h-4 mt-1 shrink-0 text-blue-500" />
                         <span className="text-sm">{plan.location}</span>
                       </div>
 
