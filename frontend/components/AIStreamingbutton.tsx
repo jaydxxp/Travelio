@@ -35,7 +35,7 @@ export default function AIStreamingButton({ isLoading }: Props) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-600 hover:to-blue-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg shadow-sky-500/30 hover:shadow-xl hover:shadow-sky-500/40 disabled:cursor-not-allowed"
+        className="w-full bg-linear-to-r from-sky-500 to-blue-500 hover:from-sky-600 hover:to-blue-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg shadow-sky-500/30 hover:shadow-xl hover:shadow-sky-500/40 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <div className="flex items-center justify-center gap-3">
